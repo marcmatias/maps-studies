@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .tooltip {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        font-size: 14px;
+        z-index: 1;
+      }
+      svg {
+        fill: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="map">
+        <div id="canvas"></div>
+      </div>
+      <div class="tooltip"></div>
+    </section>
+    <script src="app.js"></script>
+  </body>
+</html>

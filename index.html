@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maps</title>
+
+  </head>
+  <body>
+    <div style="width: 45%">
+      <canvas id="canvas"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <script src="https://unpkg.com/chartjs-chart-geo@3.9.0"></script>
+    <script>
+      fetch(
+        "https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/bra.topo.json"
+      )
+        .then((r) => r.json())
+        .then((br) => {
+          const state = ChartGeo.topojson.feature(br, br.objects.bra).features;
+          const chart = new Chart(
+            document.getElementById("canvas").getContext("2d"),
+            {
+              type: "choropleth",
+              data: {
+                labels: state.map((d, i) => d.properties.name || i),
+                datasets: [
+                  {
+                    label: "Estados",
+                    outline: state,
+                    data: state.map((d) => ({
+                      feature: d,
+                      value: Math.random() * 10
+                    }))
+                  }
+                ]
+              },
+              options: {
+                showOutline: true,
+                showGraticule: true,
+                plugins: {
+                  legend: {
+                    display: false
+                  }
+                },
+                scales: {
+                  xy: {
+                    projection: "mercator"
+                  }
+                }
+              }
+            }
+          );
+        });
+
+    </script>
+  </body>
+</html>
